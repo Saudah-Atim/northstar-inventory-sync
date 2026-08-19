@@ -15,4 +15,4 @@ Created the northstar-inventory-sync repository and inventory Webhook and saw ho
 Continued with Inventory Webhook
 I learned about the Class Inventory Webhook and what the different java terminologies means like what a class is, learned that java mehtod names can not have spaces and the first letter of the word needs to be in upper case format. It also needs prenthese () after its name. 
 Ran the java program in Vscode, pushed it to GitHub and confirmed that GitHub shows Update inventory products and quantities.
-### journal started 
+Created a README file that provides and overview of the project everything about the project and i added it to GitHub
