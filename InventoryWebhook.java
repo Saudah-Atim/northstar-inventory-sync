@@ -1,25 +1,58 @@
+import com.sun.net.httpserver.HttpServer;
+import com.sun.net.httpserver.HttpExchange;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
+
 class InventoryWebhook {
 
-    InventoryWebhook() {
-    }
+    public static void main(String[] args) throws IOException {
 
-    public void handleInventoryUpdate(String var1, String var2, int var3) {
-        System.out.println("Inventory update received for product: " + var1 + " (" + var2 + ") with new quantity: " + var3);
-    }
+        HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
 
-    public static void main(String[] var0) {
+        server.createContext("/stock", (HttpExchange exchange) -> {
 
-        InventoryWebhook var1 = new InventoryWebhook();
+            String path = exchange.getRequestURI().getPath();
+            String productId = path.substring("/stock/".length());
 
-        var1.handleInventoryUpdate("LAP001", "Laptops", 15);
-        var1.handleInventoryUpdate("HED001", "Headphones", 40);
-        var1.handleInventoryUpdate("MAK001", "Makeup Kits", 25);
-        var1.handleInventoryUpdate("BAR001", "Barbie Dolls", 30);
+            int stock = WarehouseAPI.getStock(productId);
 
-        System.out.println("Warehouse stock:");
-        System.out.println("Laptops: " + WarehouseAPI.getStock("LAP001"));
-        System.out.println("Headphones: " + WarehouseAPI.getStock("HED001"));
-        System.out.println("Makeup Kits: " + WarehouseAPI.getStock("MAK001"));
-        System.out.println("Barbie Dolls: " + WarehouseAPI.getStock("BAR001"));
+            String productName;
+
+            if (productId.equals("LAP001")) {
+                productName = "Laptops";
+            } else if (productId.equals("HED001")) {
+                productName = "Headphones";
+            } else if (productId.equals("MAK001")) {
+                productName = "Makeup Kits";
+            } else if (productId.equals("BAR001")) {
+                productName = "Barbie Dolls";
+            } else {
+                productName = "Unknown Product";
+            }
+
+            String response;
+
+            if (stock > 0) {
+                response = productId + " - " + productName
+                        + "\nAvailable stock: " + stock
+                        + "\nStatus: IN STOCK";
+            } else {
+                response = productId + " - " + productName
+                        + "\nAvailable stock: 0"
+                        + "\nStatus: OUT OF STOCK";
+            }
+
+            exchange.sendResponseHeaders(200, response.getBytes().length);
+
+            OutputStream output = exchange.getResponseBody();
+            output.write(response.getBytes());
+            output.close();
+        });
+
+        server.start();
+
+        System.out.println("Northstar Inventory Sync is LIVE!");
+        System.out.println("Open http://localhost:8080/stock/LAP001");
     }
 }

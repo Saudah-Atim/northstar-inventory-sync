@@ -26,4 +26,6 @@ I trid to run the WarehouseAPI and it was giving me an error of it cant find the
 
 ## 20th August 2026
 link the WarehouseAPI to Inventory Webhook.
+### What i built
+Live protoype showing all inventory and what is in stock
 
