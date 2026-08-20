@@ -16,3 +16,14 @@ Continued with Inventory Webhook
 I learned about the Class Inventory Webhook and what the different java terminologies means like what a class is, learned that java mehtod names can not have spaces and the first letter of the word needs to be in upper case format. It also needs prenthese () after its name. 
 Ran the java program in Vscode, pushed it to GitHub and confirmed that GitHub shows Update inventory products and quantities.
 Created a README file that provides and overview of the project everything about the project and i added it to GitHub
+I created a warehouseAPI.java that has all the products and their product IDs
+
+### What i learned
+The WarehouseAPI has all the stock information and the Inventory Webhook has all the inventory updates and need to connect the two. 
+
+### Chanllenges
+I trid to run the WarehouseAPI and it was giving me an error of it cant find the main String method in class.
+
+## 20th August 2026
+link the WarehouseAPI to Inventory Webhook.
+
