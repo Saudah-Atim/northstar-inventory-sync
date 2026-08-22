@@ -1,4 +1,5 @@
 # Northstar Inventory Sync
+[Open Live Prototype] https://northstar-inventory-sync-9lsx.onrender.com
 
 ## Project Overview
 
